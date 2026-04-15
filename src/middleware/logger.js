@@ -1,7 +1,9 @@
 import pino from 'pino-http';
 
 export const logger = pino({
-  transport: {
-    target: 'pino-pretty',
-  },
+  transport: process.env.NODE_ENV === 'development'
+    ? {
+        target: 'pino-pretty',
+      }
+    : undefined,
 });
