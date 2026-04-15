@@ -11,9 +11,9 @@ const PORT = process.env.PORT || 3000;
 
 
 app.use(pino({
-  transport: {
+  transport: process.env.NODE_ENV !== 'production' ? {
     target: 'pino-pretty',
-  },
+  } : undefined,
 }));
 
 app.use(cors());
