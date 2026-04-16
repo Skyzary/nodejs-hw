@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { celebrate } from 'celebrate';
 import * as authController from '../controllers/authController.js';
 import {
   registerUserSchema,
@@ -7,8 +8,16 @@ import {
 
 const router = Router();
 
-router.post('/auth/register', registerUserSchema, authController.registerUser);
-router.post('/auth/login', loginUserSchema, authController.loginUser);
+router.post(
+  '/auth/register',
+  celebrate(registerUserSchema),
+  authController.registerUser,
+);
+router.post(
+  '/auth/login',
+  celebrate(loginUserSchema),
+  authController.loginUser,
+);
 router.post('/auth/refresh', authController.refreshUserSession);
 router.post('/auth/logout', authController.logoutUser);
 
